@@ -64,7 +64,7 @@
                     </li>
                     <li class="nav-item">&ensp;&ensp;</li>
                     <li class="nav-item">
-                        <img src="/static/images/avatar.png" width="30">
+                        <img src="/static/images/avatar.png" width="30" onclick="window.location.href='/profile'" style="cursor: pointer;">
                     </li>
                     {% if not request.user.is_authenticated %}
                     <li class="nav-item">&ensp;&ensp;</li>

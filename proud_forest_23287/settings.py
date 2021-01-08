@@ -157,7 +157,7 @@ MIDDLEWARE += ["whitenoise.middleware.WhiteNoiseMiddleware"]
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+    #"allauth.account.auth_backends.AuthenticationBackend",
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
@@ -222,6 +222,9 @@ if USE_S3:
     )
     MEDIA_URL = "/mediafiles/"
     MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'media')
 
 
 # start fcm_django push notifications

@@ -1,6 +1,7 @@
 .main-container{
     display: flex;
-    margin: 5% 13%;
+    flex-wrap: nowrap;
+    margin: 5% 14%;
     position: absolute;
   
     box-shadow: 0 15px 0px  #D2D2D2;
@@ -11,7 +12,7 @@
 .left-panel{
     background-color: #EC1C24;
     width:500px;
-    height: 430px;
+    height: auto;
     color: #FFFFFF;
     text-align: center;
     padding-top: 10%;
@@ -23,7 +24,7 @@
     background-color:#231F20;
     width:500px;
     color: #FFFFFF;
-    height: 430px;
+    height: auto;
 
 }
 
@@ -107,4 +108,32 @@ a:hover{
   }
   .step.finish {
     background-color: #F40085;
+  }
+
+  /* Profile page styles */
+
+  .card-header{
+      background-color: #EC1C24 ;
+      color:#FFFFFF ;
+      text-align: center;
+  }
+  .card-body{
+      background-color: #231F20;
+      padding: 1% 15%;
+  }
+
+  .card-expanse{
+      background-color: #D2D2D2;
+      height: 10px;
+  }
+  .profile-heading{
+      color: #909090;
+  }
+
+  .profile-info{
+      color: #FFFFFF;
+  }
+
+  hr{
+      background-color: #565656;
   }

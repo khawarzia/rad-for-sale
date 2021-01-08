@@ -20,6 +20,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from login_app import views as loginview
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #path("", include("home.urls")),
@@ -44,8 +46,10 @@ urlpatterns = [
     path('signout',loginview.logout,name='logout'),
     path('reset-password',loginview.reset_password_first,name='reset1'),
     path('new-password/<str:key>',loginview.reset_password_second,name='reset2'),
+    path('profile',loginview.profile_page,name='profile'),
+    path('save-profile',loginview.save_profile,name='save-profile'),
 
-]
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 admin.site.site_header = "Proud Forest"
 admin.site.site_title = "Proud Forest Admin Portal"

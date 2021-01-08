@@ -1,17 +1,17 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.models import User
+from users.models import User
 from django.contrib import auth
 from django.core.mail import EmailMessage
 from .models import profile
 from django.http import Http404
 from random import randint
+from django.core.files.storage import FileSystemStorage
 
 def home(request):
     if not request.user.is_authenticated:
         return redirect('/signup')
-    template = 'base.html'
-    context = {}
-    return render(request,template,context)
+    else:
+        return redirect('/home')
 
 def signup(request):
     template = 'login_app/signup2.html'
@@ -48,7 +48,7 @@ def signup(request):
             objp.save()
         except:
             pass
-        return redirect('/')
+        return redirect('/profile')
     return render(request,template,context)
 
 def login(request):
@@ -62,7 +62,7 @@ def login(request):
         obj = objs[0]
         if obj.check_password(request.POST['pass']):
             auth.login(request,obj)
-            return redirect('/')
+            return redirect('/profile')
         else:
             context['message'] = 'Your Password is incorrect.'
             return render(request,template,context)
@@ -112,3 +112,81 @@ def reset_password_second(request,key):
             return Http404
         return redirect('/signin')
     return render(request,template,context)
+
+def profile_page(request):
+    if not request.user.is_authenticated:
+        return redirect('/signin')
+    template = 'login_app/profile.html'
+    context = {}
+    obj = profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        try:
+            image = request.FILES['pic']
+            fs = FileSystemStorage()
+            filename = fs.save(image.name, image)
+            obj.picture = fs.url(filename)
+            obj.save()
+        except:
+            pass
+    context['profile'] = obj
+    return render(request,template,context)
+
+def save_profile(request):
+    obj = request.user
+    objp = profile.objects.get(user=obj)
+    try:
+        obj.first_name = request.POST['name']
+        obj.save()
+    except:
+        pass
+    try:
+        obj.email = request.POST['email']
+        obj.save()
+    except:
+        pass
+    try:
+        objp.phone = request.POST['phone']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.address = request.POST['address']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.zip_code = request.POST['zipcode']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.country = request.POST['country']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.card_holder = request.POST['holder']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.card_number = request.POST['number']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.cvc = request.POST['cvc']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.expiration_month = request.POST['month']
+        objp.save()
+    except:
+        pass
+    try:
+        objp.expiration_year = request.POST['year']
+        objp.save()
+    except:
+        pass
+    return redirect('/profile')
