@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Auctions
+{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4><strong>MY AUCTIONS</strong></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h6><strong>ONGOING</strong></h6>
+        </div>
+    </div>
+
+    {% for auctions in auctions1 %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="d-flex" style="background-color: #231F20;height: 120px;box-shadow: 0 15px 0px  #D2D2D2;">
+                <img src="{{auctions.picture.url}}" class="bd-highlight" style="height: 120px;width: 200px;">
+                <div class="container col-sm-8">
+                    <div class="row" style="height: 60px;">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-7" style="color: white;position: relative;right: 30px;"><br>
+                            <h4>
+                                <strong>{{auctions.name}}</strong>
+                            </h4>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3"><br>
+                            <button class="btn" style="background: none;color: rgb(228, 40, 203);border-color: rgb(228, 40, 203);
+                            width: 70%;height: 30px;border-radius: 0px ;font-size:12px;left: 30px;position: relative;">NO RESERVE</button>
+                        </div>
+                        <div class="col-sm-12">
+                            <hr style="border-color: white;width: 95%;position: relative;bottom: 15px;left: 10px;">
+                        </div>
+                    </div>
+                    <div class="row text-center" style="height: 50px;position: relative;top: 10px;">
+                        <div class="col-sm-3">
+                            <span class="fa fa-clock-o" style="color: #FAEE4B;"><a style="color: white;"> Ends: {{auctions.ends_in}} Days</a> </span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="fa fa-arrow-up" style="color: #FAEE4B;"><a style="color: white;"> Current Bid: ${{auctions.current_bid}}</a> </span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="fa fa-check-circle" style="color: #FAEE4B;"><a style="color: white;"> Total Bids: {{auctions.total_bids}}</a> </span>
+                        </div>
+                        <div class="col-sm-3">&ensp;
+                            <span class="fa fa-comment" style="color: #FAEE4B;"><a style="color: white;"> Comments: {{auctions.comments}}</a> </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container justify-content-between col-sm-2">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn" style="border-radius:0px;background-color:#35BBB0;color: black;height: 40px;
+                            position: relative;top: 40px;width: 80%;font-size: small;font-weight: 700;">
+                                VIEW LISTING
+                            </button>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    {% endfor %}
+    
+    <br>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h6><strong>ENDED</strong></h6>
+        </div>
+    </div>
+
+    {% for auctions in auctions2 %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="d-flex" style="background-color: #231F20;height: 120px;box-shadow: 0 15px 0px  #D2D2D2;">
+                <img src="{{auctions.picture.url}}" class="bd-highlight" style="height: 120px;width: 200px;">
+                <div class="container col-sm-8">
+                    <div class="row" style="height: 60px;">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-7" style="color: white;position: relative;right: 30px;"><br>
+                            <h4>
+                                <strong>{{auctions.name}}</strong>
+                            </h4>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3"><br>
+                            <button class="btn" style="background: none;color: rgb(228, 40, 203);border-color: rgb(228, 40, 203);
+                            width: 70%;height: 30px;border-radius: 0px ;font-size:12px;left: 30px;position: relative;">NO RESERVE</button>
+                        </div>
+                        <div class="col-sm-12">
+                            <hr style="border-color: white;width: 95%;position: relative;bottom: 15px;left: 10px;">
+                        </div>
+                    </div>
+                    <div class="row text-center" style="height: 50px;position: relative;top: 10px;">
+                        <div class="col-sm-3">
+                            <span class="fa fa-clock-o" style="color: #FAEE4B;"><a style="color: white;"> Ends: {{auctions.ends_in}} Days</a> </span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="fa fa-arrow-up" style="color: #FAEE4B;"><a style="color: white;"> Current Bid: ${{auctions.current_bid}}</a> </span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span class="fa fa-check-circle" style="color: #FAEE4B;"><a style="color: white;"> Total Bids: {{auctions.total_bids}}</a> </span>
+                        </div>
+                        <div class="col-sm-3">&ensp;
+                            <span class="fa fa-comment" style="color: #FAEE4B;"><a style="color: white;"> Comments: {{auctions.comments}}</a> </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container justify-content-between col-sm-2">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn" style="border-radius:0px;background-color:#35BBB0;color: black;height: 40px;
+                            position: relative;top: 40px;width: 80%;font-size: small;font-weight: 700;">
+                                VIEW LISTING
+                            </button>        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

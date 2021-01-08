@@ -18,4 +18,13 @@ class Auction(models.Model):
     # Timestamp
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    # ---- Dummy fields ----
+    picture = models.ImageField(null=True)
+    ends_in = models.IntegerField(default=5)
+    current_bid = models.IntegerField(default=0)
+    total_bids = models.IntegerField(default=9)
+    comments = models.IntegerField(default=0)
+    name = models.CharField(max_length=150,default='')
 
+    def __str__(self):
+        return self.name

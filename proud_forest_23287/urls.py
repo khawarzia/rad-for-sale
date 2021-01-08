@@ -20,6 +20,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from login_app import views as loginview
+from auction_app import views as auctionview
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -48,6 +49,8 @@ urlpatterns = [
     path('new-password/<str:key>',loginview.reset_password_second,name='reset2'),
     path('profile',loginview.profile_page,name='profile'),
     path('save-profile',loginview.save_profile,name='save-profile'),
+
+    path('my-auctions',auctionview.auctions,name='auctions'),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

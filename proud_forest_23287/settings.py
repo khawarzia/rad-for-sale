@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "chat_user_profile",
     'login_app',
     'auction_app',
+    'notification_app',
+    'newsletter_app',
 ]
 LOCAL_APPS = [
     "home",
@@ -191,6 +193,7 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 # Custom user model
 AUTH_USER_MODEL = "users.User"
 
+SENDGRID_KEY = env.str("SENDGRID_KEY","")
 EMAIL_HOST = env.str("EMAIL_HOST", "smtp.sendgrid.net")
 EMAIL_HOST_USER = env.str("SENDGRID_USERNAME", "")
 EMAIL_HOST_PASSWORD = env.str("SENDGRID_PASSWORD", "")
