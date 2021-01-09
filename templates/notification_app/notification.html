@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Notifications
+{% endblock %}
+
+{% block head %}
+<style>
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  float:right;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input.success:checked + .slider {
+  background-color: #8bc34a;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card" style="box-shadow: 0 15px 0px  #D2D2D2;border-radius: 0;">
+                <div class="card-header" style="border-radius: 0;background-color: #EC1C24;color: white;">
+                    <h5>
+                        ACTIVITY ON LISTINGS
+                    </h5>
+                </div>
+                <div class="card-body" style="border-radius: 0;background-color: #231F20;overflow-y: scroll;height: 600px;">
+                    {% for i,j in notifications.items %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <i style="color: white;">{{i}}</i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <hr style="border-width: 2px;">
+                    </div>
+                    {% for k in j %}
+                    <div class="row">
+                        <div class="col-sm-2">
+                            {% if k.notification_type %}
+                            <span class="fa fa-3x fa-arrow-up" style="color: yellow;"></span>
+                            {% else %}
+                            <span class="fa fa-3x fa-comment" style="color: yellow;"></span>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-10">
+                            <p style="color: white;">{{k.subject}}<br><a href="#">See more</a></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <form method="POST" action="{% url 'pref-submit' %}" id="pref-form">{% csrf_token %}</form>
+        <script>
+            function func1(){
+                var formdata = $('#pref-form').serialize();
+                $.ajax({
+                    type:'POST',
+                    url:$('#pref-form').attr('action'),
+                    data:formdata,
+                }).done(function(response){
+                    console.log(response);
+                    return
+                });
+            }
+        </script>
+        <div class="col-sm-6">
+            <br><br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5>
+                        <strong>ACTIVITY SETTINGS</strong>
+                    </h5>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>
+                        <strong>RFS EMAIL</strong>
+                    </p>
+                    <hr style="border-width: 2px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Send me the RFS daily email</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="rfs_daily" form="pref-form" onchange="func1()" {% if pref.rfs_daily %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Send me the RFS week in review email</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="rfs_week" form="pref-form" onchange="func1()" {% if pref.rfs_week %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>
+                        <strong>GENERAL NOTIFICATIONS</strong>
+                    </p>
+                    <hr style="border-width: 2px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Notify me when I'm mentioned in comments</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="comment_mention" form="pref-form" onchange="func1()" {% if pref.comment_mention %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Notify me when someone replies to me in comments</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="comment_reply" form="pref-form" onchange="func1()" {% if pref.comment_reply %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Play sound when bids are placed (desktop only)</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="play_sound" form="pref-form" onchange="func1()" {% if pref.play_sound %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>
+                        <strong>WATCH LIST NOTIFICATIONS</strong>
+                    </p>
+                    <hr style="border-width: 2px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Notify me 2 hourse before auction ends</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="before_auction" form="pref-form" onchange="func1()" {% if pref.before_auction %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Notify me when there's new bids</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="new_bids" form="pref-form" onchange="func1()" {% if pref.new_bids %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Notify me when there's new comments</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="new_comments" form="pref-form" onchange="func1()" {% if pref.new_comments %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Notify me when questions are answered</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="questions_answered" form="pref-form" onchange="func1()" {% if pref.questions_answered %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <small>Notify me with the auction's results</small>
+                </div>
+                <div class="col-sm-2">
+                    <label class="switch ">
+                        <input type="checkbox" class="success" name="auction_results" form="pref-form" onchange="func1()" {% if pref.auction_results %}checked{% endif %}>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

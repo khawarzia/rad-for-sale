@@ -21,6 +21,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from login_app import views as loginview
 from auction_app import views as auctionview
+from notification_app import views as notificationview
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -51,6 +52,9 @@ urlpatterns = [
     path('save-profile',loginview.save_profile,name='save-profile'),
 
     path('my-auctions',auctionview.auctions,name='auctions'),
+
+    path('notifications',notificationview.notification_page,name='notifications'),
+    path('preference-submit',notificationview.preference_submit,name='pref-submit'),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

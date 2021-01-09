@@ -6,10 +6,27 @@ class notification_model(models.Model):
     user = models.ForeignKey(User,on_delete=models.PROTECT)
     subject = models.CharField(max_length=400,default='')
     body = models.TextField(max_length=4000)
-    date_time = models.DateTimeField(auto_now_add=True)
+    notification_type = models.BooleanField(default=True) # True = arrow  /  False = comment
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
+
+class notification_pref(models.Model):
+    user = models.ForeignKey(User,on_delete=models.PROTECT)
+    rfs_daily = models.BooleanField(default=False)
+    rfs_week = models.BooleanField(default=False)
+    comment_mention = models.BooleanField(default=False)
+    comment_reply = models.BooleanField(default=False)
+    play_sound = models.BooleanField(default=False)
+    before_auction = models.BooleanField(default=False)
+    new_bids = models.BooleanField(default=False)
+    new_comments = models.BooleanField(default=False)
+    questions_answered = models.BooleanField(default=False)
+    auction_results = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
 
 
 ####### Use this function for notifications
