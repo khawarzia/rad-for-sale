@@ -6,7 +6,7 @@ class notification_model(models.Model):
     user = models.ForeignKey(User,on_delete=models.PROTECT)
     subject = models.CharField(max_length=400,default='')
     body = models.TextField(max_length=4000)
-    notification_type = models.BooleanField(default=True) # True = arrow  /  False = comment
+    notification_type = models.BooleanField(default=False) # False = arrow  /  True = comment
     date = models.DateField(auto_now_add=True)
 
     def __str__(self):
@@ -28,22 +28,27 @@ class notification_pref(models.Model):
     def __str__(self):
         return self.user.username
 
-
 ####### Use this function for notifications
 
-def send_notification(user_obj,subject_text,body_text):
+def send_notification(user_obj,subject_text,body_text,is_comment):
     """
     user is the user object
+    is_comment is true when the notification is
+    regarding a comment and false otherwise
     """
     obj = notification_model()
     obj.user = user_obj
     obj.subject = subject_text
     obj.body = body_text
+    obj.notification_type = is_comment
     obj.save()
-    email_obj = EmailMessage(
-        subject=subject_text,
-        body=body_text,
-        to=[user_obj.email],
-    )
-    email_obj.send()
-    return 1
+    try:
+        email_obj = EmailMessage(
+            subject=subject_text,
+            body=body_text,
+            to=[user_obj.email],
+        )
+        email_obj.send()
+        return 1
+    except:
+        return 0

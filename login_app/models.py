@@ -10,7 +10,7 @@ class profile(models.Model):
     card_holder = models.CharField(max_length=100,default='')
     card_number = models.IntegerField(default=1234123412341234)
     cvc = models.IntegerField(default=123)
-    expiration_month = models.CharField(max_length=100,default='')
+    expiration_month = models.CharField(max_length=100,default='DECEMBER')
     expiration_year = models.IntegerField(default=2021)
     picture = models.ImageField(upload_to='profile',null=True)
     password_key = models.CharField(max_length=50,default='')

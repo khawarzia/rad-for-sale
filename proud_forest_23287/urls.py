@@ -22,6 +22,7 @@ from drf_yasg import openapi
 from login_app import views as loginview
 from auction_app import views as auctionview
 from notification_app import views as notificationview
+from newsletter_app import views as newsletterview
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -55,6 +56,9 @@ urlpatterns = [
 
     path('notifications',notificationview.notification_page,name='notifications'),
     path('preference-submit',notificationview.preference_submit,name='pref-submit'),
+
+    path('newsletter-signup',newsletterview.newsletter_signup,name='news-signup'),
+    path('newsletter-signup-complete',newsletterview.signup_complete,name='signup-comp'),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

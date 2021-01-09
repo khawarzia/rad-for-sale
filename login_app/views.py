@@ -6,6 +6,7 @@ from .models import profile
 from django.http import Http404
 from random import randint
 from django.core.files.storage import FileSystemStorage
+from newsletter_app.views import newsletter_signup
 
 def home(request):
     if not request.user.is_authenticated:
@@ -46,6 +47,11 @@ def signup(request):
             objp.save()
             objp.expiration_year = request.POST['year']
             objp.save()
+        except:
+            pass
+        try:
+            if request.POST['newsl'] == 'on':
+                a = newsletter_signup(request)
         except:
             pass
         return redirect('/profile')
