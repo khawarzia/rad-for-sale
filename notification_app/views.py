@@ -6,7 +6,7 @@ def notification_page(request):
     context = {}
     objs = notification_model.objects.filter(user=request.user)
     temp_dic = {}
-    for i in objs:
+    for i in reversed(objs):
         try:
             temp_dic[i.date].append(i)
         except:
