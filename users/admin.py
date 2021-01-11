@@ -15,3 +15,9 @@ class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (("User", {"fields": ("name",)}),) + auth_admin.UserAdmin.fieldsets
     list_display = ["username", "name", "is_superuser"]
     search_fields = ["name"]
+
+
+from .models import profile,Payment_keys
+
+admin.site.register(profile)
+admin.site.register(Payment_keys)

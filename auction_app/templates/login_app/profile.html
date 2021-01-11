@@ -29,7 +29,7 @@ Profile
                         </div>
                     </div>
                     <!-- Card Body -->
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         {% if not profile.picture %}
                         <svg width="167" height="169" viewBox="0 0 167 169" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +95,6 @@ Profile
                     <script>
                         function func1(a){
                             if (a.className == 'fa fa-pencil'){
-                                a.className = 'fa fa-save';
                                 b = document.getElementsByClassName('first-p');
                                 for(i=0;i<b.length;i++){
                                     b[i].style = 'display:none;';
@@ -104,14 +103,11 @@ Profile
                                 for(i=0;i<b.length;i++){
                                     b[i].style.display = '';
                                 }
-                            }
-                            else{
-                                document.getElementById('saveform').submit();
+                                document.getElementById('btn1').style.display = '';
                             }
                         }
                         function func2(a){
                             if (a.className == 'fa fa-pencil'){
-                                a.className = 'fa fa-save';
                                 b = document.getElementsByClassName('second-p');
                                 for(i=0;i<b.length;i++){
                                     b[i].style = 'display:none;';
@@ -120,9 +116,7 @@ Profile
                                 for(i=0;i<b.length;i++){
                                     b[i].style.display = '';
                                 }
-                            }
-                            else{
-                                document.getElementById('saveform').submit();
+                                document.getElementById('btn2').style.display = '';
                             }
                         }
                     </script>
@@ -158,6 +152,9 @@ Profile
                         <p class="profile-info first-p">{{profile.country}}</p>
                         <input type="text" class="first-i" value="{{profile.country}}" form="saveform" style="display: none;" name="country">
                         <hr>
+                        <button class="btn" style="background-color:#35BBB0;border-radius: 0px;font-weight: 750;font-size: 16px;padding-left: 20px;padding-right: 20px;position: relative;left: 60%;display: none;" id="btn1" form="saveform" onclick="this.form.submit()" type="submit">
+                            SUBMIT
+                        </button>
                     </div>
                     <div class="card-expanse"></div>
                 </div>
@@ -238,7 +235,9 @@ Profile
                             </select>
                         </p>
                         <hr>
-
+                        <button class="btn" style="background-color:#35BBB0;border-radius: 0px;font-weight: 750;font-size: 16px;padding-left: 20px;padding-right: 20px;position: relative;left: 60%;display: none;" id="btn2" form="saveform" onclick="this.form.submit()" type="submit">
+                            SUBMIT
+                        </button>
                     </div>
                     <div class="card-expanse">
                     </div>

@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "chat",
     "chat_user_profile",
-    'login_app',
     'auction_app',
     'notification_app',
     'newsletter_app',
