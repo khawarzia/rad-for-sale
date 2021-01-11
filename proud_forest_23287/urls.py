@@ -19,10 +19,6 @@ from allauth.account.views import confirm_email
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from login_app import views as loginview
-from auction_app import views as auctionview
-from notification_app import views as notificationview
-from newsletter_app import views as newsletterview
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -42,23 +38,11 @@ urlpatterns = [
     path("chat_user_profile/", include("chat_user_profile.urls")),
     path("api/v1/", include("users.api.v1.urls")),
     path("home/", include("home.urls")),
-
-    path('',loginview.home,name='home'),
-    path('signup',loginview.signup,name='signup'),
-    path('signin',loginview.login,name='login'),
-    path('signout',loginview.logout,name='logout'),
-    path('reset-password',loginview.reset_password_first,name='reset1'),
-    path('new-password/<str:key>',loginview.reset_password_second,name='reset2'),
-    path('profile',loginview.profile_page,name='profile'),
-    path('save-profile',loginview.save_profile,name='save-profile'),
-
-    path('my-auctions',auctionview.auctions,name='auctions'),
-
-    path('notifications',notificationview.notification_page,name='notifications'),
-    path('preference-submit',notificationview.preference_submit,name='pref-submit'),
-
-    path('newsletter-signup',newsletterview.newsletter_signup,name='news-signup'),
-    path('newsletter-signup-complete',newsletterview.signup_complete,name='signup-comp'),
+    
+    path('/',include('login_app.urls')),
+    path('/',include('auction_app.urls')),
+    path('/',include('notification_app.urls')),
+    path('/',include('newsletter_app.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

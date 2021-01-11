@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from django.contrib.auth import get_user_model
 
 class profile(models.Model):
     user = models.ForeignKey(User,on_delete=models.PROTECT)
@@ -17,3 +18,12 @@ class profile(models.Model):
 
     def __str__(self):
         return ('Profile belonging to {}'.format(self.user))
+
+class Payment_keys(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    payment_method_key = models.CharField(max_length=150,default='')
+    customer_Id = models.CharField(max_length=150,default='')
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def _str_(self):
+        return self.user.username

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from users.models import User
 from django.contrib import auth
 from django.core.mail import EmailMessage
-from .models import profile
+from .models import profile,Payment_keys
 from django.http import Http404
 from random import randint
 from django.core.files.storage import FileSystemStorage
@@ -47,6 +47,10 @@ def signup(request):
             objp.save()
             objp.expiration_year = request.POST['year']
             objp.save()
+            obja = Payment_keys()
+            obja.payment_method_key = str(objp.id)
+            obja.customer_Id = str(obj.id)
+            obja.save()
         except:
             pass
         try:
