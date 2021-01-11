@@ -39,10 +39,10 @@ urlpatterns = [
     path("api/v1/", include("users.api.v1.urls")),
     path("home/", include("home.urls")),
     
-    path('/',include('login_app.urls')),
-    path('/',include('auction_app.urls')),
-    path('/',include('notification_app.urls')),
-    path('/',include('newsletter_app.urls')),
+    path('',include('login_app.urls')),
+    path('',include('auction_app.urls')),
+    path('',include('notification_app.urls')),
+    path('',include('newsletter_app.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
